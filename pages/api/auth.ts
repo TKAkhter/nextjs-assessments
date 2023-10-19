@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const valid = await validateUser({ username, password });
 
     if (valid) {
-      const token = jwt.sign({ username, password }, process.env.JWT_SECRET_KEY!, {
+      const token = jwt.sign({ username, password }, process.env.NEXT_PUBLIC_JWT_SECRET_KEY!, {
         expiresIn: '1h',
       });
 
