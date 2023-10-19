@@ -22,6 +22,7 @@ export const useLogin = async (user: loginModel) => {
             const { token } = data;
 
             Cookies.set('token', token);
+            localStorage.setItem('username', username);
         } else if (response.status === 401) {
             return ({error: 'Invalid username or password. Please try again.'});
         } else {

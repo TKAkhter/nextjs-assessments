@@ -15,13 +15,15 @@ const useAuthCheck: React.FC<UseAuthCheckProps> = ({ children }) => {
 
     useEffect(() => {
         const token = Cookies.get('token');
+        console.log("🚀 ~ file: use-auth-check.ts:18 ~ useEffect ~ token:", token);
         const decodedToken = getTokenDecoded(token as string);
+        console.log("🚀 ~ file: use-auth-check.ts:20 ~ useEffect ~ decodedToken:", decodedToken);
         
         if (!token || decodedToken.error) {
             router.push('/login');
         }
 
-        if (decodedToken) {
+        if (!decodedToken.error) {
             const refreshToken = jwt.sign({ username: decodedToken.username, password: decodedToken.password }, process.env.NEXT_PUBLIC_JWT_SECRET_KEY!, {
                 expiresIn: '1h',
             });
